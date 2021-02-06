@@ -1,0 +1,256 @@
+{
+	"info": {
+		"_postman_id": "de6afec7-3576-402d-a107-ccb9fa29a106",
+		"name": "Web Motors",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Make",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData =  pm.response.json()\r",
+							"\r",
+							"var make = jsonData.map(function(item) {return item.ID;});\r",
+							"\r",
+							"pm.collectionVariables.set(\"idMake\", make)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://desafioonline.webmotors.com.br/api/OnlineChallenge/Make",
+					"protocol": "http",
+					"host": [
+						"desafioonline",
+						"webmotors",
+						"com",
+						"br"
+					],
+					"path": [
+						"api",
+						"OnlineChallenge",
+						"Make"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Model",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var idMakeF = pm.collectionVariables.get(\"idMake\")\r",
+							"\r",
+							"var posicao = _.random((Object.keys(idMakeF).length)-1)\r",
+							"\r",
+							"pm.collectionVariables.set('idMake_f', (idMakeF[posicao]))\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData =  pm.response.json()\r",
+							"\r",
+							"var idModel = jsonData.map(function(item) {return item.ID;});\r",
+							"\r",
+							"pm.collectionVariables.set(\"idModel\", idModel)\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://desafioonline.webmotors.com.br/api/OnlineChallenge/Model?MakeID={{idMake_f}}",
+					"protocol": "http",
+					"host": [
+						"desafioonline",
+						"webmotors",
+						"com",
+						"br"
+					],
+					"path": [
+						"api",
+						"OnlineChallenge",
+						"Model"
+					],
+					"query": [
+						{
+							"key": "MakeID",
+							"value": "{{idMake_f}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Version",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var idModelF = pm.collectionVariables.get(\"idModel\")\r",
+							"\r",
+							"var posicao = _.random((Object.keys(idModelF).length)-1)\r",
+							"\r",
+							"pm.collectionVariables.set('idModel_f', (idModelF[posicao]))"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://desafioonline.webmotors.com.br/api/OnlineChallenge/Version?ModelID={{idModel_f}}",
+					"protocol": "http",
+					"host": [
+						"desafioonline",
+						"webmotors",
+						"com",
+						"br"
+					],
+					"path": [
+						"api",
+						"OnlineChallenge",
+						"Version"
+					],
+					"query": [
+						{
+							"key": "ModelID",
+							"value": "{{idModel_f}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vehicles",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://desafioonline.webmotors.com.br/api/OnlineChallenge/Vehicles?Page={{idMake_f}}",
+					"protocol": "http",
+					"host": [
+						"desafioonline",
+						"webmotors",
+						"com",
+						"br"
+					],
+					"path": [
+						"api",
+						"OnlineChallenge",
+						"Vehicles"
+					],
+					"query": [
+						{
+							"key": "Page",
+							"value": "{{idMake_f}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status code is 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "idMake",
+			"value": ""
+		},
+		{
+			"key": "idMakeF",
+			"value": ""
+		},
+		{
+			"key": "idMake_f",
+			"value": ""
+		},
+		{
+			"key": "idModel",
+			"value": ""
+		},
+		{
+			"key": "idModel_f",
+			"value": ""
+		}
+	]
+}
