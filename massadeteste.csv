@@ -1,0 +1,11 @@
+id;username;firstName;lastName;email;password;phone;pet;category_name;namePet;photoUrls;tags_name;status
+11;joao_11;Joao ;Amaral;joaoamaral@gmail.com;joaoamaral;1146898750;11;cat 1;cat1;;cat1;available
+12;maria_12;Maria;Braga;mariabraga@gmail.com;mariabraga;1146898787;12;cat 2;cat2;;cat2;available
+13;fernanda_13;Fernanda;Castilho;fernandacastilho@gmail.com;fernandacastilho;1146897800;13;cat 3;cat3;;cat3;available
+14;luis_14;Luis;Ferraz;luisferraz@gmail.com;luisferraz;1146898000;14;cat 4;cat4;;cat4;available
+15;larissa_15;Larissa;Dias;larissadias@gmail.com;larissadias;1146898888;15;cat 5;cat5;;cat5;available
+11;joao_11;Joao ;Amaral;joaoamaral@gmail.com;joaoamaral;1146898750;16;dog 1;dog1;https://bityli.com/sDpSW;dog1;available
+12;maria_12;Maria;Braga;mariabraga@gmail.com;mariabraga;1146898787;17;dog 2;dog2;https://bityli.com/sDpSW;dog2;available
+13;fernanda_13;Fernanda;Castilho;fernandacastilho@gmail.com;fernandacastilho;1146897800;18;dog 3;dog3;https://bityli.com/sDpSW;dog3;available
+14;luis_14;Luis;Ferraz;luisferraz@gmail.com;luisferraz;1146898000;19;dog 4;dog4;https://bityli.com/sDpSW;dog4;available
+15;larissa_15;Larissa;Dias;larissadias@gmail.com;larissadias;1146898888;20;dog 5;dog5;https://bityli.com/sDpSW;dog5;available
