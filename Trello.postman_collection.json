@@ -1,0 +1,505 @@
+{
+	"info": {
+		"_postman_id": "aefd18b4-d36a-4f0d-b618-c3e7b58d1cdf",
+		"name": "Trello",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Board",
+			"item": [
+				{
+					"name": "CREATE / board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.collectionVariables.set(\"boardId\", jsonData.id);\r",
+									"\r",
+									"\r",
+									"pm.test(\"Valida o nome \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.name).to.eql(\"Processo Seletivo\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/1/boards/?key={{key}}&token={{token}}&name=Processo Seletivo",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								""
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "name",
+									"value": "Processo Seletivo"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET/ board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validando nome do board\", function(){\r",
+									"    pm.expect(pm.response.name).to.eql(\"Processo Seletivo\")\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/1/boards/{{boardId}}?key={{key}}&token={{token}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{boardId}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE/ board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/1/boards/{{boardId}}?key={{key}}&token={{token}}&name=Dia a dia -  Mari&labelNames/yellow=atenção&labelNames/green=OK&labelNames/red=atrasado&labelNames/purple=importante&pinned=true&prefs/background=purple",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{boardId}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "name",
+									"value": "Dia a dia -  Mari"
+								},
+								{
+									"key": "labelNames/yellow",
+									"value": "atenção"
+								},
+								{
+									"key": "labelNames/green",
+									"value": "OK"
+								},
+								{
+									"key": "labelNames/red",
+									"value": "atrasado"
+								},
+								{
+									"key": "labelNames/purple",
+									"value": "importante"
+								},
+								{
+									"key": "pinned",
+									"value": "true"
+								},
+								{
+									"key": "prefs/background",
+									"value": "purple"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE / board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/1/boards/{{boardId}}?key={{key}}&token={{token}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{boardId}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "List",
+			"item": [
+				{
+					"name": "CREATE/ list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData  = pm.response.json();\r",
+									"\r",
+									"pm.collectionVariables.set(\"IdList\", jsonData.id)\r",
+									"\r",
+									"pm.test(\"Verificando o board\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.idBoard).to.eql(pm.collectionVariables.get(\"boardId\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/1/lists?key={{key}}&token={{token}}&name=Bloqueado&idBoard={{boardId}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"1",
+								"lists"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "name",
+									"value": "Bloqueado"
+								},
+								{
+									"key": "idBoard",
+									"value": "{{boardId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE/ list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/1/lists/{{IdList}}?key={{key}}&token={{token}}&pos=bottom",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"1",
+								"lists",
+								"{{IdList}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "pos",
+									"value": "bottom"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Card",
+			"item": [
+				{
+					"name": "CREATE/ card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"IdCard\", jsonData.id);\r",
+									"\r",
+									"pm.test(\"Valida id da Lista \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.idList).to.eql(pm.collectionVariables.get(\"IdList\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"name\", \"Olha eu aqui\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/1/cards?key={{key}}&token={{token}}&idList={{IdList}}&desc=Testando&labels=green&dueComplete=false&name={{name}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"1",
+								"cards"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "idList",
+									"value": "{{IdList}}"
+								},
+								{
+									"key": "desc",
+									"value": "Testando"
+								},
+								{
+									"key": "labels",
+									"value": "green"
+								},
+								{
+									"key": "dueComplete",
+									"value": "false"
+								},
+								{
+									"key": "name",
+									"value": "{{name}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE/ card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n       \"cover\":\r\n    { \r\n        \"idAttachment\": 0,\r\n        \"color\": \"blue\",\r\n        \"url\": null,\r\n        \"size\": \"normal\",\r\n        \"brightness\": \"dark\"\r\n     }\r\n   }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/1/cards/{{IdCard}}?key={{key}}&token={{token}}&name=oi&labels=yellow",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"1",
+								"cards",
+								"{{IdCard}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								},
+								{
+									"key": "name",
+									"value": "oi"
+								},
+								{
+									"key": "labels",
+									"value": "yellow"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status code is 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "boardId",
+			"value": ""
+		},
+		{
+			"key": "IdList",
+			"value": ""
+		},
+		{
+			"key": "IdCard",
+			"value": ""
+		},
+		{
+			"key": "name",
+			"value": ""
+		}
+	]
+}
